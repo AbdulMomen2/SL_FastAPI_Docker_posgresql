@@ -1,0 +1,18 @@
+[project]
+name = "fastapi-0"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "fastapi>=0.121.1",
+    "gunicorn>=23.0.0",
+    "psycopg[binary]>=3.2.12",
+    "pydantic>=2.12.4",
+    "python-decouple>=3.8",
+    "requests>=2.32.5",
+    "sqlalchemy>=2.0.44",
+    "sqlmodel>=0.0.27",
+    "timescaledb>=0.0.4",
+    "uvicorn>=0.38.0",
+]

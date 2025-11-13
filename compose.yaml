@@ -1,0 +1,33 @@
+services:
+  app:
+    # Name of the service (you can access it as "app" in Docker network)
+    image: analytics-api:v1  # Image name and tag to use or build
+    
+    build:
+      context: .              # Build context = current directory
+      dockerfile: Dockerfile  # Dockerfile to use for building the image
+
+    environment:
+      - PORT=8002             # Set environment variable inside the container
+
+    env_file:
+      - .env                  # Load additional environment variables from .env file
+
+    ports:
+      - "8080:8002"           # Map host port 8080 → container port 8002
+
+    command: uvicorn main:app --host 0.0.0.0 --port 8002 --reload
+      # Run FastAPI app with auto-reload enabled (for development)
+
+    volumes:
+      - ./src:/code:rw        # Mount local 'src' folder → container '/code' (read-write)
+
+    develop:
+      watch:
+        # Automatically rebuild image when these files change
+        - action: rebuild
+          path: Dockerfile
+        - action: rebuild
+          path: requirements.txt
+        - action: rebuild
+          path: compose.yaml   
